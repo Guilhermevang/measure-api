@@ -58,9 +58,13 @@ export class GeminiService implements IGeminiService {
     }
 
     async uploadFile(base64_image: string): Promise<ResponseFromUpload> {
-        const uuidFileName: string = uuidv4();
+        const uuidFileName: string =
+            uuidv4() +
+            "-water-gas-measure" +
+            ".jpg";
+
         const imageBuffer: Buffer = this.utils.generateBufferFromImage(base64_image);
-        const filePath: string = this.utils.writeTempFile(`${uuidFileName}-water-gas-measure.jpg`, "./content", imageBuffer);
+        const filePath: string = this.utils.writeTempFile(uuidFileName, "./content", imageBuffer);
         
         const uploadResponse: UploadFileResponse = await this.fileManager.uploadFile(
             filePath,
@@ -70,12 +74,15 @@ export class GeminiService implements IGeminiService {
             }
         );
 
+        // Como decidi gerar as URLs temporárias através desses arquivos estáticos, não vou excluí-los ap´s criaçao
+        // this.utils.discardTempFile(filePath);
+
         console.log(`Arquivo '${uploadResponse.file.displayName}' enviado com sucesso. URI: ${uploadResponse.file.uri}`);
 
         return {
             fileResponse: uploadResponse,
             fileName: uuidFileName
-        }
+        } as ResponseFromUpload;
     }
 
     async fetchFile(file_name: string): Promise<FileMetadataResponse> {

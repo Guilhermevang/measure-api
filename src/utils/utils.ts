@@ -1,5 +1,5 @@
 import CustomException from './../entities/exceptions/custom-exception';
-import { writeFileSync, unlinkSync, write } from 'fs';
+import { writeFileSync, unlinkSync } from 'fs';
 import { join } from 'path';
 
 class Utils {
@@ -19,6 +19,10 @@ class Utils {
         const tempFilePath: string = join(path, file_name);
         writeFileSync(tempFilePath, buffer);
         return tempFilePath;
+    }
+
+    discardTempFile(temp_file_path: string): void {
+        unlinkSync(temp_file_path);
     }
 }
 

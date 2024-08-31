@@ -28,7 +28,7 @@ export class MeasuresService implements IMeasuresService {
     }
 
     generateTempImageUrl(file_name: string): string {
-        return `http://localhost:${this.PORT_NUMBER}/content/${file_name}`;
+        return `http://localhost:${this.PORT_NUMBER}/images/${file_name}`;
     }
 
     async processImage(body: ImageProcessing): Promise<MeasureResultFromGemini> {
@@ -49,6 +49,7 @@ export class MeasuresService implements IMeasuresService {
             body.measure_type
         );
 
+        // Se já existir leituras do usuário, para o tipo, e no mês
         if (measures.length > 0) {
             throw new CustomException("DOUBLE_REPORT");
         }
