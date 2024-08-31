@@ -10,6 +10,7 @@ import { MeasureListResponse } from "./../entities/responses/measure-list-respon
 import MeasureType from "./../entities/enums/measure-type";
 import MeasureConfirmationRequest from "./../entities/requests/measure-confirmation-request";
 import MeasureConfirmationResponse from "./../entities/responses/measure-confirmation-response";
+import CustomException from "./../entities/exceptions/custom-exception";
 
 const route = express.Router();
 
@@ -39,8 +40,15 @@ route.patch("/confirm", async (req: express.Request, res: express.Response) => {
 route.get("/:customer_code/list", async (req: express.Request, res: express.Response) => {
     return await controllerBase.execute(res, async () => {
         const customer_code: string = req.params.customer_code;
+        
         const query_measure_type: string = req.query.measure_type as string;
-        const measure_type: MeasureType = query_measure_type.toUpperCase() as unknown as MeasureType;
+        const measure_type = query_measure_type.toUpperCase() as MeasureType;
+        const measure_types: MeasureType[] = ["WATER", "GAS"];
+
+        if(!measure_types.includes(measure_type)) {
+            throw new CustomException("INVALID_TYPE");
+        }
+        
         const result: MeasureListResponse = await measuresService.listMeasures(customer_code, measure_type);
         return result;
     });
