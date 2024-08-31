@@ -1,0 +1,17 @@
+{
+    "compilerOptions": {
+        "module": "NodeNext",
+        "moduleResolution": "NodeNext",
+        "target": "ES2022",
+        "baseUrl": "src",
+        "noImplicitAny": true,
+        "sourceMap": true,
+        "esModuleInterop": true,
+        "outDir": "dist",
+        "experimentalDecorators": true, // PERMITE OS 'DECORATORS' NO CONSTRUTOR
+    },
+    "include": ["src/**/*"],
+    "exclude": [
+      "node_modules"
+    ]
+}
