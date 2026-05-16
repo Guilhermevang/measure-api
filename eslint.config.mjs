@@ -4,9 +4,12 @@ import prettier from "eslint-config-prettier";
 
 /** @type {import('eslint').Linter.FlatConfig[]} */
 export default [
+  // Ignores globais — precisam ser declarados em objeto separado no flat config
+  {
+    ignores: ["src/__tests__/**", "dist/**"],
+  },
   {
     files: ["src/**/*.ts"],
-    ignores: ["src/__tests__/**"],
     languageOptions: {
       parser: tsparser,
       parserOptions: {

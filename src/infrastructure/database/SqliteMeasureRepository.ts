@@ -1,5 +1,4 @@
 import Database from 'better-sqlite3';
-import { v4 as uuidv4 } from 'uuid';
 import Measure, { MeasureData } from '@domain/entities/Measure';
 import MeasureType from '@domain/enums/MeasureType';
 import MeasureRepository from '@domain/ports/MeasureRepository';
