@@ -12,15 +12,18 @@ const config: Config = {
     "^@presentation/(.*)$": "<rootDir>/src/presentation/$1",
     "^@shared/(.*)$": "<rootDir>/src/shared/$1",
   },
-  collectCoverageFrom: ["src/**/*.ts", "!src/__tests__/**"],
-  globals: {
-    "ts-jest": {
-      tsconfig: {
-        strict: true,
-        esModuleInterop: true,
+  transform: {
+    "^.+\\.ts$": [
+      "ts-jest",
+      {
+        tsconfig: {
+          strict: true,
+          esModuleInterop: true,
+        },
       },
-    },
+    ],
   },
+  collectCoverageFrom: ["src/**/*.ts", "!src/__tests__/**"],
 };
 
 export default config;
