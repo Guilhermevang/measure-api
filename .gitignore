@@ -1,7 +1,8 @@
 node_modules/
 dist/
 .env
-storage/
+# diretório de imagens geradas em runtime (raiz do projeto)
+/storage/
 *.sqlite
 *.sqlite-shm
 *.sqlite-wal
