@@ -1,14 +1,15 @@
 services:
-  node-api:
+  api:
     build:
       context: .
-      dockerfile: Dockerfile
+      target: production
     ports:
-      - "8800:8800"
+      - "${PORT:-8800}:8800"
     env_file:
       - .env
-    working_dir: /app
     volumes:
-      - .:/app
-      - /app/node_modules
-    command: npm run dev
+      - meter_storage:/app/storage
+    restart: unless-stopped
+
+volumes:
+  meter_storage:
