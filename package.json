@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "API para leitura automática de hidrômetros e medidores via IA (Gemini)",
   "main": "dist/main.js",
+  "packageManager": "yarn@3.8.5",
   "scripts": {
     "build": "tsc && tsc-alias",
     "start": "npm run build && node dist/main.js",
@@ -12,7 +13,14 @@
     "lint": "eslint src --ext .ts",
     "lint:fix": "eslint src --ext .ts --fix"
   },
-  "keywords": ["meter-reading", "gemini", "ai", "water", "gas", "electricity"],
+  "keywords": [
+    "meter-reading",
+    "gemini",
+    "ai",
+    "water",
+    "gas",
+    "electricity"
+  ],
   "author": "Guilherme Evangelista",
   "license": "MIT",
   "dependencies": {
