@@ -1,41 +1,13 @@
-lib-cov
-*.seed
-*.log
-*.csv
-*.dat
-*.out
-*.pid
-*.gz
-*.swp
-
-pids
-logs
-results
-tmp
-
-# Build
-public/css/main.css
-
-# Coverage reports
-coverage
-
-# API keys and secrets
+node_modules/
+dist/
 .env
-
-# Dependency directory
-node_modules
-bower_components
-
-# Editors
-.idea
-*.iml
-
-# OS metadata
+# diretório de imagens geradas em runtime (raiz do projeto)
+/storage/
+*.sqlite
+*.sqlite-shm
+*.sqlite-wal
+coverage/
+*.log
 .DS_Store
 Thumbs.db
-
-# Ignore built ts files
-dist/**/*
-
-# ignore yarn.lock
-yarn.lock
+.nvmrc

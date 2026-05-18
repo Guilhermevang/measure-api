@@ -1,21 +1,28 @@
-FROM node:latest as builder
+FROM node:20-alpine AS builder
 
 WORKDIR /app
 
 COPY package*.json ./
-
-RUN npm install
+RUN npm ci --ignore-scripts
 
 COPY . .
+RUN npm run build
 
-FROM builder as development
-ENV NODE_ENV=development
+# ---
+
+FROM node:20-alpine AS production
+
+ENV NODE_ENV=production
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm ci --omit=dev --ignore-scripts
+
+COPY --from=builder /app/dist ./dist
+
+RUN mkdir -p storage
 
 EXPOSE 8800
 
-CMD ["npm", "run", "dev"]
-
-FROM builder as production
-ENV NODE_ENV=production
-
-CMD ["npm", "start"]
+CMD ["node", "dist/main.js"]

@@ -1,0 +1,48 @@
+meta {
+  name: Listar Leituras
+  type: http
+  seq: 3
+}
+
+get {
+  url: {{baseUrl}}/api/cliente-001/list
+  body: none
+  auth: none
+}
+
+headers {
+  X-API-Key: {{apiKey}}
+}
+
+query {
+  ~measure_type: WATER
+}
+
+docs {
+  # Listar Leituras do Cliente
+
+  Retorna todas as leituras de um cliente. O parâmetro `measure_type` é opcional.
+
+  ## Parâmetros de rota
+  - `customer_code` — Identificador do cliente (edite a URL acima)
+
+  ## Query string
+  - `measure_type` *(opcional)* — Filtra por tipo: `WATER`, `GAS` ou `ELECTRICITY`
+    (o `~` no Bruno significa que o parâmetro está desabilitado por padrão)
+
+  ## Resposta de sucesso (200)
+  ```json
+  {
+    "customer_code": "cliente-001",
+    "measures": [
+      {
+        "measure_uuid": "550e8400-...",
+        "measure_datetime": "2024-08-15T10:30:00.000Z",
+        "measure_type": "WATER",
+        "has_confirmed": false,
+        "image_url": "http://localhost:8800/images/abc123-water-meter.jpg"
+      }
+    ]
+  }
+  ```
+}

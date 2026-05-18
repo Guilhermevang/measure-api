@@ -1,0 +1,42 @@
+meta {
+  name: Confirmar Leitura
+  type: http
+  seq: 2
+}
+
+patch {
+  url: {{baseUrl}}/api/confirm
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  X-API-Key: {{apiKey}}
+}
+
+body:json {
+  {
+    "measure_uuid": "SUBSTITUA_PELO_UUID_DA_LEITURA",
+    "confirmed_value": 12345
+  }
+}
+
+docs {
+  # Confirmar Leitura
+
+  Confirma ou corrige o valor lido pela IA. Só pode ser feito **uma vez** por leitura.
+
+  ## Parâmetros
+  - `measure_uuid` — UUID retornado pela rota de upload
+  - `confirmed_value` — Valor confirmado (ou corrigido) pelo operador. Deve ser inteiro e não negativo.
+
+  ## Resposta de sucesso (200)
+  ```json
+  { "success": true }
+  ```
+
+  ## Erros possíveis
+  - `404 MEASURE_NOT_FOUND` — UUID não encontrado
+  - `409 CONFIRMATION_DUPLICATE` — Leitura já foi confirmada anteriormente
+}

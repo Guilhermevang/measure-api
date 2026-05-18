@@ -1,0 +1,59 @@
+meta {
+  name: Processar Imagem
+  type: http
+  seq: 1
+}
+
+post {
+  url: {{baseUrl}}/api/upload
+  body: json
+  auth: none
+}
+
+headers {
+  Content-Type: application/json
+  X-API-Key: {{apiKey}}
+}
+
+body:json {
+  {
+    "image": "SUBSTITUA_PELO_BASE64_DA_IMAGEM",
+    "customer_code": "cliente-001",
+    "measure_datetime": "2024-08-15T10:30:00Z",
+    "measure_type": "WATER"
+  }
+}
+
+docs {
+  # Processar Imagem de Medidor
+
+  Envia a foto de um medidor (água, gás ou energia elétrica) em base64 e retorna o valor lido pela IA.
+
+  ## Como gerar o base64 da imagem
+
+  **Linux/macOS:**
+  ```bash
+  base64 -i foto_do_medidor.jpg
+  ```
+
+  **Windows (PowerShell):**
+  ```powershell
+  [Convert]::ToBase64String([IO.File]::ReadAllBytes("foto_do_medidor.jpg"))
+  ```
+
+  ## Tipos de medidor aceitos
+  - `WATER` — Hidrômetro (água)
+  - `GAS` — Medidor de gás
+  - `ELECTRICITY` — Medidor de energia elétrica
+
+  ## Resposta de sucesso (200)
+  ```json
+  {
+    "image_url": "http://localhost:8800/images/abc123-water-meter.jpg",
+    "measure_value": 12345,
+    "measure_uuid": "550e8400-e29b-41d4-a716-446655440000"
+  }
+  ```
+
+  Guarde o `measure_uuid` para confirmar a leitura na próxima requisição.
+}
