@@ -2,8 +2,6 @@
 
 API para leitura automática de medidores de água, gás e energia elétrica via inteligência artificial. Você tira uma foto do hidrômetro, manda pra API, e ela devolve o valor — usando o Gemini (Google) pra fazer a leitura.
 
-Esse projeto surgiu como desafio técnico de uma vaga em 2024 e acabou virando um bom exemplo de como estruturar uma API Node.js com DDD sem exagerar na complexidade.
-
 ---
 
 ## O que faz
